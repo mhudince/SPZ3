@@ -1,0 +1,34 @@
+struct zapis{
+    char ime[35], prezime[35];
+    int godina, dan, mjesec;
+    float stanje_tekuceg, stanje_deviznog;
+    short transakcija, prioritet;
+};
+typedef zapis element;
+
+struct qu{
+    zapis klijenti[10000];
+    int front, rear;
+};
+typedef qu QQ;
+int AddOne(int n){
+  	return (n+1)%10000;
+}
+zapis FrontQ(QQ *Q){
+      	return Q->klijenti[Q->front];
+}
+void EnQueueQ(zapis x,QQ *Q){
+	Q->rear = AddOne(Q->rear);
+    Q->klijenti[Q->rear] = x;
+}
+void DeQueueQ(QQ *Q){
+	Q->front = AddOne(Q->front);
+}
+void InitQ(QQ *Q){
+    Q->front = 0; Q->rear = 9999;
+}
+bool IsEmptyQ(QQ *Q){
+	if(AddOne(Q->rear) == Q->front)
+	return true;
+	else return false;
+}
