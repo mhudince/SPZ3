@@ -1,0 +1,47 @@
+struct zapis{
+    char ime[35], prezime[35];
+    int godina, dan, mjesec;
+    float stanje_tekuceg, stanje_deviznog;
+    short transakcija, prioritet;
+};
+struct qu{
+    zapis value;
+    qu *next;
+};
+struct que{
+    qu *front;
+    qu *rear;
+};
+typedef qu *element;
+typedef que QQ;
+
+zapis FrontQ(QQ *Q){
+     return Q->front->next->value;
+}
+void EnQueueQ(zapis x,QQ *Q){
+    element novi = new qu;
+    novi->value = x;
+    novi->next = NULL;
+    Q->rear->next = novi;
+    Q->rear = novi;
+}
+void DeQueueQ(QQ *Q){
+		element ToDelete;
+    ToDelete = Q->front->next;
+    Q->front->next = ToDelete->next;
+    delete ToDelete;
+    if (Q->front->next == NULL) {
+        Q->rear = Q->front;
+    }
+}
+void InitQ(QQ *Q){
+    element empty = new qu; 
+    Q->front = empty;
+    Q->rear = empty;
+    empty->next = NULL;
+}
+bool IsEmptyQ(QQ *Q){
+	if(Q->front == Q->rear)
+	return true;
+    else return false;
+}
